@@ -21,7 +21,10 @@ RUN cp .env.example .env || true
 
 RUN php artisan key:generate --force || true
 
-RUN chmod -R 775 storage bootstrap/cache
+RUN mkdir -p /app/database
+RUN touch /app/database/database.sqlite
+
+RUN chmod -R 775 storage bootstrap/cache database
 
 RUN php artisan config:clear || true
 RUN php artisan cache:clear || true
